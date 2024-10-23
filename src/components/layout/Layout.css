@@ -1,0 +1,17 @@
+.ant-layout-sider {
+	height: 100dvh;
+}
+
+.ant-layout-content {
+	height: calc(100vh - 64px);
+	overflow-y: auto;
+	margin: 0 !important;
+}
+
+.ant-layout-header {
+	background-color: #001529 !important;
+}
+
+.ant-layout-header .ant-btn {
+	color: white !important;
+}
