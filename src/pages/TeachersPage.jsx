@@ -11,99 +11,28 @@ import {
 	Table,
 	Typography,
 } from 'antd'
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { LIMIT } from '../constants'
-import request from '../servers/request'
+import CRUD from '../hooks/CRUD'
 
 const TeachersPage = () => {
 	const { Title } = Typography
-
-	const [fetchData, setFetchData] = useState([])
-	const [loading, setLoading] = useState(false)
-	const [errorData, setErrorData] = useState(null)
-	const [isModalOpen, setIsModalOpen] = useState(false)
-	const [activePage, setActivePage] = useState(1)
-	const [total, setTotal] = useState(0)
-	const [selected, setSelected] = useState(null)
-	const [modalLoading, setmodalLoading] = useState(false)
-	const [form] = Form.useForm()
-
-	const getData = useCallback(async () => {
-		try {
-			setLoading(true)
-			let params = {
-				page: activePage,
-				limit: LIMIT,
-			}
-			const { data } = await request.get('teachers', { params })
-			const { data: totalData } = await request.get('teachers')
-
-			setTotal(totalData.length)
-
-			setFetchData(data)
-		} catch (error) {
-			setErrorData(error)
-		} finally {
-			setLoading(false)
-		}
-	}, [activePage])
-
-	useEffect(() => {
-		getData()
-	}, [getData])
-
-	const showModal = () => {
-		setSelected(null)
-		setIsModalOpen(true)
-		form.resetFields()
-	}
-	const handleOk = async () => {
-		try {
-			setmodalLoading(true)
-			let values = await form.validateFields()
-			if (selected === null) {
-				await request.post('teachers', values)
-			} else {
-				await request.put(`teachers/${selected}`, values)
-			}
-			getData()
-			setIsModalOpen(false)
-		} catch (error) {
-			console.log(error)
-		} finally {
-			setmodalLoading(false)
-		}
-	}
-	const handleCancel = () => {
-		setIsModalOpen(false)
-	}
-
-	const handleEdit = async ({ id }) => {
-		try {
-			setIsModalOpen(true)
-			setSelected(id)
-			let { data } = await request.get(`teachers/${id}`)
-			form.setFieldsValue(data)
-		} catch (error) {
-			console.log(error)
-		}
-	}
-
-	const handleDelete = ({ id }) => {
-		Modal.confirm({
-			title: 'Deleted Teacher',
-			content: 'Do you want to deleted this teacher?',
-			onOk: async () => {
-				try {
-					await request.delete(`teachers/${id}`)
-					getData()
-				} catch (error) {
-					console.log(error)
-				}
-			},
-		})
-	}
+	const {
+		handleEdit,
+		handleDelete,
+		total,
+		showModal,
+		loading,
+		fetchData,
+		activePage,
+		setActivePage,
+		isModalOpen,
+		handleCancel,
+		handleOk,
+		selected,
+		modalLoading,
+		form,
+	} = CRUD('teachers', 'teacher')
 
 	const columns = [
 		{
