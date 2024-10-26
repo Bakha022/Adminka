@@ -6,7 +6,7 @@ import {
 	UploadOutlined,
 	UserOutlined,
 } from '@ant-design/icons'
-import { Button, Layout, Menu, Modal, theme } from 'antd'
+import { Button, Flex, Layout, Menu, Modal, theme } from 'antd'
 import React, { useState } from 'react'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
@@ -68,15 +68,6 @@ const AdminLayout = ({ setIsLogin }) => {
 							icon: <TeamOutlined />,
 							label: <Link to={'/students'}>Students</Link>,
 						},
-						{
-							key: '4',
-							icon: <UploadOutlined />,
-							label: (
-								<Button onClick={logout} danger type='primary' to={'/students'}>
-									Log out
-								</Button>
-							),
-						},
 					]}
 				/>
 			</Sider>
@@ -87,16 +78,27 @@ const AdminLayout = ({ setIsLogin }) => {
 						background: colorBgContainer,
 					}}
 				>
-					<Button
-						type='text'
-						icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-						onClick={() => setCollapsed(!collapsed)}
-						style={{
-							fontSize: '16px',
-							width: 64,
-							height: 64,
-						}}
-					/>
+					<Flex
+						style={{ paddingRight: '30px' }}
+						justify='space-between'
+						align='center'
+					>
+						<Button
+							type='text'
+							icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+							onClick={() => setCollapsed(!collapsed)}
+							style={{
+								fontSize: '16px',
+								width: 64,
+								height: 64,
+							}}
+						/>
+
+						<Button onClick={logout} danger type='primary' to={'/students'}>
+							<UploadOutlined />
+							Log out
+						</Button>
+					</Flex>
 				</Header>
 				<Content
 					style={{

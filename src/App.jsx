@@ -21,6 +21,7 @@ const App = () => {
 						<Route element={<AdminLayout setIsLogin={setIsLogin} />}>
 							<Route path='dashboard' element={<Dashboard />} />
 							<Route path='teachers' element={<TeachersPage />} />
+							<Route path='teachers/students/:id' element={<StudentsPage />} />
 							<Route path='students' element={<StudentsPage />} />
 						</Route>
 					</Fragment>
