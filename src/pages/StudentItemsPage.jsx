@@ -157,6 +157,7 @@ const StudentItemsPage = () => {
 					autoComplete='off'
 					initialValues={{
 						IsMerried: false,
+						isWork: false,
 					}}
 					form={form}
 					onFinish={handleOk}
@@ -192,6 +193,31 @@ const StudentItemsPage = () => {
 							{
 								required: true,
 								message: 'Please input your image!',
+							},
+						]}
+					>
+						<Input />
+					</Form.Item>
+
+					<Form.Item
+						label='Phone number'
+						name='phoneNumber'
+						rules={[
+							{
+								required: true,
+								message: 'Please input your Phone number!',
+							},
+						]}
+					>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						label='Email'
+						name='email'
+						rules={[
+							{
+								required: true,
+								message: 'Please input your email!',
 							},
 						]}
 					>
