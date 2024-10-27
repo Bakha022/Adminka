@@ -1,18 +1,9 @@
-import {
-	Button,
-	Checkbox,
-	Flex,
-	Form,
-	Image,
-	Input,
-	Modal,
-	Pagination,
-	Space,
-	Table,
-	Typography,
-} from 'antd'
-import { Fragment, React } from 'react'
+import { Button, Image, Space, Typography } from 'antd'
+import { React } from 'react'
 import { useParams } from 'react-router-dom'
+import ModalComponent from '../components/modal/ModalComponent'
+import PaginationComponents from '../components/pagination/PaginationComponents'
+import TableComponent from '../components/table/TableComponent'
 import CRUD from '../hooks/CRUD'
 
 const StudentItemsPage = () => {
@@ -109,154 +100,22 @@ const StudentItemsPage = () => {
 		},
 	]
 
+	const tablePorps = { total, showModal, loading, fetchData, columns }
+	const paginationProps = { total, activePage, setActivePage }
+	const modalProps = {
+		isModalOpen,
+		handleOk,
+		handleCancel,
+		selected,
+		modalLoading,
+		form,
+	}
+
 	return (
 		<>
-			<Table
-				pagination={false}
-				scroll={{
-					x: 1000,
-				}}
-				title={() => (
-					<Fragment>
-						<Flex align='center' justify='space-between'>
-							<Title level={2}>Students of the teacher Page ({total})</Title>
-							<Button onClick={showModal} type='dashed'>
-								Add Student
-							</Button>
-						</Flex>
-					</Fragment>
-				)}
-				columns={columns}
-				loading={loading}
-				dataSource={fetchData}
-				rowKey='id'
-			/>
-			<Flex style={{ marginTop: '20px' }} justify='end'>
-				<Pagination
-					total={total}
-					current={activePage}
-					onChange={page => setActivePage(page)}
-				/>
-			</Flex>
-			<Modal
-				title='Student added modal'
-				open={isModalOpen}
-				onOk={handleOk}
-				onCancel={handleCancel}
-				okText={selected === null ? 'Added Student' : 'Save student'}
-				maskClosable={false}
-				confirmLoading={modalLoading}
-			>
-				<Form
-					labelCol={{
-						span: 24,
-					}}
-					wrapperCol={{
-						span: 24,
-					}}
-					autoComplete='off'
-					initialValues={{
-						IsMerried: false,
-						isWork: false,
-					}}
-					form={form}
-					onFinish={handleOk}
-				>
-					<Form.Item
-						label='First name'
-						name='firstName'
-						rules={[
-							{
-								required: true,
-								message: 'Please input your First name!',
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						label='Last name'
-						name='lastName'
-						rules={[
-							{
-								required: true,
-								message: 'Please input your Last name!',
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						label='Image'
-						name='avatar'
-						rules={[
-							{
-								required: true,
-								message: 'Please input your image!',
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label='Phone number'
-						name='phoneNumber'
-						rules={[
-							{
-								required: true,
-								message: 'Please input your Phone number!',
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						label='Email'
-						name='email'
-						rules={[
-							{
-								required: true,
-								message: 'Please input your email!',
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label='Date of birthday'
-						name='birthday'
-						rules={[
-							{
-								required: true,
-								message: 'Please input your birthday!',
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						name='isWork'
-						valuePropName='checked'
-						wrapperCol={{
-							span: 12,
-						}}
-					>
-						<Checkbox>Is work</Checkbox>
-					</Form.Item>
-
-					<Form.Item
-						name='IsMerried'
-						valuePropName='checked'
-						wrapperCol={{
-							span: 12,
-						}}
-					>
-						<Checkbox>Is Married</Checkbox>
-					</Form.Item>
-				</Form>
-			</Modal>
+			<TableComponent {...tablePorps} title={'Student'} />
+			<PaginationComponents {...paginationProps} />
+			<ModalComponent {...modalProps} title={'Student'} />
 		</>
 	)
 }
