@@ -5,9 +5,9 @@ import { IS_LOGIN } from './constants'
 import Dashboard from './pages/Dashboard'
 import LoginPage from './pages/LoginPage'
 import NotFound from './pages/NotFound'
+import StudentItemsPage from './pages/StudentItemsPage'
 import StudentsPage from './pages/StudentsPage'
 import TeachersPage from './pages/TeachersPage'
-import StudentItemsPage from './pages/StudentItemsPage'
 const App = () => {
 	const [isLogin, setIsLogin] = useState(
 		Boolean(localStorage.getItem(IS_LOGIN)) || false
@@ -22,8 +22,11 @@ const App = () => {
 						<Route element={<AdminLayout setIsLogin={setIsLogin} />}>
 							<Route path='dashboard' element={<Dashboard />} />
 							<Route path='teachers' element={<TeachersPage />} />
-							<Route path='teachers/students/:id' element={<StudentItemsPage />} />
-							<Route path='students' element={<StudentsPage />} />
+							<Route
+								path='teachers/students/:id'
+								element={<StudentItemsPage />}
+							/>
+							<Route path='students/:id' element={<StudentsPage />} />
 						</Route>
 					</Fragment>
 				) : null}

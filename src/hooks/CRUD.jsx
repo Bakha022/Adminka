@@ -55,7 +55,7 @@ const CRUD = (url, dataName) => {
 			getData()
 			setIsModalOpen(false)
 		} catch (error) {
-			console.log(error)
+			console.log(error.response?.data)
 		} finally {
 			setmodalLoading(false)
 		}

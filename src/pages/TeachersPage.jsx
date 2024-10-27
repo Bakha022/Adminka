@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Image, Input, Space } from 'antd'
+import { Button, Image, Space } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ModalComponent from '../components/modal/ModalComponent'
@@ -74,13 +74,20 @@ const TeachersPage = () => {
 
 	const tablePorps = { total, showModal, loading, fetchData, columns }
 	const paginationProps = { total, activePage, setActivePage }
-	const modalProps = {isModalOpen, handleOk, handleCancel, selected, modalLoading, form }
+	const modalProps = {
+		isModalOpen,
+		handleOk,
+		handleCancel,
+		selected,
+		modalLoading,
+		form,
+	}
 
 	return (
 		<>
 			<TableComponent {...tablePorps} title={'Teacher'} />
 			<PaginationComponents {...paginationProps} />
-			<ModalComponent {...modalProps} title={'Teacher'}  />
+			<ModalComponent {...modalProps} title={'Teacher'} />
 		</>
 	)
 }

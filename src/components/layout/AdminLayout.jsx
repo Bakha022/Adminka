@@ -66,7 +66,7 @@ const AdminLayout = ({ setIsLogin }) => {
 						{
 							key: '/students',
 							icon: <TeamOutlined />,
-							label: <Link to={'/students'}>Students</Link>,
+							label: <Link to={`/students/2`}>Students</Link>,
 						},
 					]}
 				/>

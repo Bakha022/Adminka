@@ -1,4 +1,4 @@
-import { Button, Image, Space, Typography } from 'antd'
+import { Button, Image, Space } from 'antd'
 import { React } from 'react'
 import { useParams } from 'react-router-dom'
 import ModalComponent from '../components/modal/ModalComponent'
@@ -9,7 +9,6 @@ import CRUD from '../hooks/CRUD'
 const StudentItemsPage = () => {
 	const { id } = useParams()
 
-	const { Title } = Typography
 	const {
 		handleEdit,
 		handleDelete,
@@ -102,6 +101,7 @@ const StudentItemsPage = () => {
 
 	const tablePorps = { total, showModal, loading, fetchData, columns }
 	const paginationProps = { total, activePage, setActivePage }
+
 	const modalProps = {
 		isModalOpen,
 		handleOk,
