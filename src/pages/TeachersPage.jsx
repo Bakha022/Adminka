@@ -36,6 +36,12 @@ const TeachersPage = () => {
 
 	const columns = [
 		{
+			title: 'ID',
+			dataIndex: 'id',
+			key: 'id',
+			render: data => data,
+		},
+		{
 			title: 'Avatar',
 			dataIndex: 'avatar',
 			key: 'avatar',
@@ -174,12 +180,6 @@ const TeachersPage = () => {
 					>
 						<Checkbox>Is Married</Checkbox>
 					</Form.Item>
-
-					<Form.Item
-						wrapperCol={{
-							span: 24,
-						}}
-					></Form.Item>
 				</Form>
 			</Modal>
 		</>

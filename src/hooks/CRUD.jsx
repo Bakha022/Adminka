@@ -49,6 +49,8 @@ const CRUD = (url, dataName) => {
 			let values = await form.validateFields()
 			if (selected === null) {
 				await request.post(url, values)
+				console.log(values);
+				
 			} else {
 				await request.put(`${url}/${selected}`, values)
 			}
